@@ -29,7 +29,8 @@ builder.Services.AddDefaultIdentity<MyUserRole>(options => options.SignIn.Requir
 // builder.WebHost.UseUrls("http://localhost:5001","https://localhost:5555");
 // builder.Services.AddHttpsRedirection(option =>{
 //     option.HttpsPort = 5555;
-});
+// });
+
 //ADD secsion
 builder.Services.AddDistributedMemoryCache();  // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
 builder.Services.AddSession(cfg => {           // Đăng ký dịch vụ Session
