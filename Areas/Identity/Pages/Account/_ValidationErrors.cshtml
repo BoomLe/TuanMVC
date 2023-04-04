@@ -1,0 +1,21 @@
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model ModelStateDictionary
+
+@if(!Model.IsValid)
+{
+    <div class="validation-summary-errors">
+        <ul>
+            @* @foreach (var modelError in 
+                     Model.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+            {
+                
+           
+            } *@
+            @* @{
+                var modelError =  Model.SelectMany(keyValuePair => keyValuePair.Value.Errors).FirstOrDefault();
+            } *@
+            <li>Tài khoản này đã có trên hệ thống</li>
+            
+        </ul>
+    </div>
+}

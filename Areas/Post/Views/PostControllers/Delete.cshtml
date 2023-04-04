@@ -1,0 +1,17 @@
+@model App.Areas.Post.Models.PostModel
+
+@{
+    ViewData["Title"] = "Xóa nội dung";
+}
+
+<h1>Bạn có chắc muốn xóa ?</h1>
+
+
+
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PostId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">TRang nội dung</a>
+    </form>
+

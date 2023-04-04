@@ -1,0 +1,46 @@
+﻿@page "/admin/User/"
+@model App.Admin.User.IndexModel
+
+@{
+    ViewData["Title"] = "Danh sách cấp quyền";
+}
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+
+
+<table class="table">
+    <tr>
+        <th> Tên Role </th>
+        <th> Vai trò   </th>
+        <th> Tác vụ </th>
+    </tr>
+    @foreach (var item in Model.user)
+    {<tr>
+        <td>@item.UserName</td>
+        <td>
+            @if(string.IsNullOrEmpty(item.RoleUser))
+            {
+            <a asp-page="./AddRole" class="text-dark" asp-route-id="@item.Id">+ Thêm quyền</a>
+                
+            }
+            else{
+            <a asp-page="./AddRole"  asp-route-id="@item.Id">@item.RoleUser</a>
+                
+            }
+        </td>
+        <td>
+            <a asp-page="./SetPassword/" class="btn btn-success btn-sm" asp-route-id="@item.Id">Đổi mật khẩu</a>
+        
+        </td>
+        
+    </tr>
+        
+    }
+    
+
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,85 @@
+@model ProductsModel
+@using App.Component
+
+@{
+   List<CategoryProduct> categories = ViewBag.categories as List<CategoryProduct>;
+              CategoryProduct category = ViewBag.category as CategoryProduct;
+              IQueryable<ProductsModel> otherProduct = ViewBag.otherPost as IQueryable<ProductsModel>;
+
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="~/">Home</a></li>
+        @if(category != null)
+        {
+            var li =category.ListParents();
+            foreach (var l in li)
+            {
+
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-route-categoryslug="@l.Slug">@l.Title</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-route-categoryslug="@category.Slug">@l.Title</a>
+                </li>                
+            }
+        }
+    </ol>
+</nav>
+
+<div class="detailpost">
+   <h1>@Model.Title</h1>
+   <div class="sapo">
+      @Model.Description
+   </div>
+   <div>
+    Giá : <strong>@Model.Price</strong>
+    <a asp-action="AddToCart" asp-route-productid="@Model.ProductId"  class="btn btn-success">Đặt hàng</a>
+   </div>
+
+   <div>
+      @* <i>Cập nhật : @Model.DateUpdated</i>/
+      Tác giả : <strong>@Model.Author.UserName</strong> *@
+   </div>
+   <hr>
+   @Html.Raw(Model.Content)
+
+</div>
+
+
+@* @section Siderbar{
+     @await Component.InvokeAsync("App.Component.CategorySidebar", 
+     new CategorySidebar.CategorySidebarData()
+     {
+        Categories =categories,
+        level = 0,
+        categoryslug = category.Slug
+     }); *@
+
+@section Siderbar {
+    @{
+        @await Component.InvokeAsync("App.Component.CategoryProductSidebar", 
+            new CategoryProductSidebar.CategorySidebarData() {
+                level = 0,
+                Categories = ViewBag.categories,
+                categoryslug = ViewBag.slugCategory
+            })
+    }
+     
+
+
+}
+@* <ul class="list-group">
+   @foreach (var post in otherProduct)
+   {
+      <li class="list-group-item">
+         <a asp-controller="ViewProductControllers" asp-action="Detail" asp-route-postslug="@post.Slug">
+            @post.Title
+            
+         </a>
+      </li>
+   } *@
+
+</ul>

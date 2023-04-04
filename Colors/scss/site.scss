@@ -1,0 +1,107 @@
+body{
+    background-color: whitesmoke;
+    color: rgb(14, 134, 5);
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  
+  body {
+    margin-bottom: 60px;
+  }
+
+
+.navbar-brand{
+ 
+  color: yellow !important;
+  &:hover{
+    color: aqua !important;
+  }
+  
+ 
+}
+.app-navbar{
+  background-color: blueviolet;
+  .text-dark{
+    color: chartreuse !important;
+    &:hover{
+      color: aquamarine !important;
+    }
+  }
+}
+
+.dropdown-toggle{
+  border-radius: 15px;
+  &:hover{
+    color: aquamarine;
+  }
+}
+
+.contact-first{
+  background-color: rgb(16, 113, 104);
+  border-radius: 10px;
+  color: white !important;
+  text-align: center;
+  h4{
+    line-height: 40px;
+    font-weight: 400;
+    margin-top: 20px;
+
+  }
+  img{
+    width: 100px;
+  }
+}
+.contact-secont{
+  font-weight: 700;
+}
+.btn-primary{
+  background-color: cadetblue !important;
+  
+  width: 10%;
+  border-radius: 10px;
+  
+}
+
+.app-gogle{
+  width: 30%;
+}
+
+.app-data1{
+  width: 30% !important;
+}
+.app-data2{
+  width: 40% !important;
+  border: 15px;
+}
+
+.created-one{
+  .created-two{
+    width: 40%;
+    margin-top: 5%;
+  }
+}
+
+.Index-one{
+  width: 15%;
+}
+
+.app-select-one{
+  width: 50%;
+  height: 10%;
+
+}
+.detailpost{
+  background-color: white !important;
+}
+.app-blogv0{
+  background-color: white !important;
+  
+}
+.app-sort{
+  width: 25%;
+}
+
+@import "footer";

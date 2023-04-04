@@ -1,0 +1,69 @@
+
+@model IEnumerable<App.Areas.Product.Models.CategoryProduct>
+
+@{
+    ViewData["Title"] = "Danh Mục Sản Phẩm";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Tạo danh mục</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+        
+            <th>
+                @Html.DisplayNameFor(model => model.Slug)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentCategory)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        await RenderCategory(item, 0);
+}
+    </tbody>
+</table>
+
+@{
+    async Task RenderCategory(CategoryProduct item, int level)
+    {
+        var paces = string.Concat(Enumerable.Repeat("**", level));
+
+       <tr>
+            <td>
+             @Html.Raw(paces)   @Html.DisplayFor(modelItem => item.Title)
+            </td>
+       
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentCategory.Slug)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Xem bài</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Xóa bài</a>
+            </td>
+        </tr>
+
+        if(item.CategoryChildren?.Count>0)
+        {
+            foreach (var cCategoryChildren in item.CategoryChildren)
+            {
+                await RenderCategory(cCategoryChildren, level+1);
+            }
+
+        }
+
+    }
+}

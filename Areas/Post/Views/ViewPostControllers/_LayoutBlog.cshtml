@@ -1,0 +1,13 @@
+@{
+    Layout = "_Layout";
+}
+
+<div class="row app-blogv0">
+    <div class="col-md-8 bg-white app-blogv1" >
+        @RenderBody()
+    </div>
+
+    <div class="col-md-4 bg-warning app-blogv2">
+        @RenderSection("Siderbar", false)
+    </div>
+</div>

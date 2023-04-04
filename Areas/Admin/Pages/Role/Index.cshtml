@@ -1,0 +1,37 @@
+﻿@page "/admin/role"
+@model App.Admin.Role.IndexModel
+
+@{
+    ViewData["Title"] = "Danh sách cấp quyền";
+}
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="role-one mb-2">
+    <a asp-page="./Created" class="btn btn-primary Index-one">Tạo quyền truy cập</a>
+    <a asp-page="../User/Index" class=" btn btn-primary Index-one">Quản lý người dùng</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th> Tên Role :</th>
+        <th> Vai trò tác vụ  :</th>
+    </tr>
+    @foreach (var item in Model.roles)
+    {<tr>
+        <td>@item.Name</td>
+        <td>
+            <a asp-page="./Edit" class="btn btn-success btn-sm" asp-route-roleid="@item.Id">Chỉnh sửa</a>
+            <a asp-page="./Delete" class="btn btn-danger btn-sm" asp-route-roleid="@item.Id">Xóa Role</a>
+        </td>
+        
+    </tr>
+        
+    }
+    
+
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

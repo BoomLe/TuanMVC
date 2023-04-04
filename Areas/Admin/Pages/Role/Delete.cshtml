@@ -1,0 +1,25 @@
+﻿@page "/admin/role/delete/{roleid}"
+@model App.Admin.Role.DeleteModel
+@{
+    ViewData["Title"] = "Xóa Quyền Truy Cập";
+}
+<h1>@ViewData["Title"]</h1>
+
+<partial name="_StatusMessage" model="@Model.StatusMessage"></partial>
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <p>Bạn có chắc muốn xóa tài khoản <strong>@Model.role.Name</strong>cấp quyền này ? </p>
+            <div class="form-group">
+                <input value="Xóa cấp quyền" type="submit" class="btn btn-danger"/>
+
+            </div>
+        </form>
+
+    </div>
+
+</div>

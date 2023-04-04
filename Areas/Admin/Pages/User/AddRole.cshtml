@@ -1,0 +1,53 @@
+﻿@page "/admin/add-role/{id}"
+@model App.Admin.User.AddRoledModel
+@{
+    ViewData["Title"] = "Đặt lại mật khẩu";
+    
+}
+
+<h3>Thiếp lập quyền thành viên : @Model.user.UserName</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="set-password-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+
+            <div class=" form-group mb-3 app-select-one">
+                <label asp-for="RoleName" class="form-label" ></label>
+
+                @Html.ListBoxFor(r => r.RoleName, @Model.AllRoles, new 
+                {
+                    id = "select-roles",
+                    @class = "w-50"
+                    
+                    
+                })
+
+         
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+       
+            <button type="submit" class="w-100 btn btn-lg btn-primary mb-5">Thêm Quyền</button>
+            <a asp-page="./Index" class="mb-5" >Trang cấp quyền</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+    <link style="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+    <script>
+        $("#select-role").multipleSelect(
+            {
+                selectAll : false,
+                keepOpen : false,
+                isOpen : false,
+
+            })
+    </script>
+
+
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,15 @@
+@{
+    ViewData["delete"] = "Xóa Databse ";
+}
+<h1>@ViewData["delete"]</h1>
+<p class="alert alert-danger">
+bạn có chắc muốn xóa CSDL ?
+</p>
+
+<form  method="post">
+    <button class="btn btn-danger" type="submit" > Xóa cơ sở dữ liệu</button>
+
+<hr>
+<a  class="abc" asp-action="Index"> Trang Quản Lý Database </a>
+
+</form>

@@ -1,0 +1,13 @@
+@inject App.Services.FoodService foodService
+<h1>Top 10 món ăn ngon nhất</h1>
+
+<div class="list-group">
+    @foreach (var foodServices in foodService)
+    {
+        <a class="list-group-item list-group-item-action"asp-controller="Food" asp-action="@foodServices.Name"  >
+            @foodServices.Name - @foodServices.Country
+        </a>
+        
+    }
+
+</div>

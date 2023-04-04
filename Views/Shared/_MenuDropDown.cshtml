@@ -1,0 +1,49 @@
+@section myclass{
+     <script>
+    let even = 'block';
+  let odd = 'none';
+  let elements = document.getElementsByClassName("dropdown-menu")
+
+  Array.prototype.forEach.call(elements, function(element) {
+    element.style.display === even ? element.style.display = odd : element.style.display = even
+  });</script>
+}
+
+
+<!-- Example single danger button -->
+<div class="btn-group">
+  <button onclick="myclass()" role="button"  data-bs-toggle="dropdown" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Manager
+  </button>
+  <div class="dropdown-menu dropdown-menu-rigt" aria-labelledby="managedropdownmenu"> 
+    <a class="dropdown-item" style="background: red;" asp-action="Index" asp-controller="DbManager" asp-area="Database">
+        Database</a>
+    <a class="dropdown-item" style="background: red;" asp-action="Index" asp-controller="Contact" asp-area="Contacts">
+        Quản lý Contact</a>
+      <a class="dropdown-item" style="background: red;" asp-action="Index" asp-controller="blog" asp-area="Blog">
+        Quản lý Blogs</a>
+      
+       <a class="dropdown-item" style="background: red;" asp-action="Index"  asp-controller="PostControllers" asp-area="Post">
+       Quản lý nội dung</a>
+        
+
+      <a class="dropdown-item" style="background: red;"  asp-page="/User/Index" asp-area="Admin">
+       Quàn lý thành viên</a>
+
+        <a class="dropdown-item" style="background: red;"  asp-page="/Role/Index" asp-area="Admin">
+       Quản lý quyền</a>
+
+       <a class="dropdown-item" style="background: red;" asp-action="Index" asp-controller="ProductCategoryControllers" asp-area="Product">
+        Quản lý danh mục SP</a>
+
+        <a class="dropdown-item" style="background: red;" asp-action="Index" asp-controller="ManagerProductControllers" asp-area="Product">
+        Quản lý Sản Phẩm</a>
+
+        
+
+
+       
+
+    
+    </div>
+</div>

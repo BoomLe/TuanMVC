@@ -1,0 +1,98 @@
+@model App.Areas.Product.Controllers.ManagerProductControllers.UploadOneFile
+@{
+    ProductsModel product = ViewData["product"] as  ProductsModel;
+}
+<h1>Upload hình ảnh : @product.Title</h1>
+
+<form method="post" enctype="multipart/form-data">
+       <label asp-for="@Model.UploadFile"></label>
+       <input asp-for="@Model.UploadFile"/>
+       <span asp-validation-for="@Model.UploadFile"></span>
+       <button class="btn btn-primary" asp-action="UploadPhoto" asp-route-id="@product.ProductId">Upload</button>
+</form>
+<div id="box-photo-upload" class="d-flex flex-wrap photo-upload" data-id=" @product.ProductId">
+    @foreach (var photo in product.Photos)
+    {
+        <div class="photodetail w-25 p-1">
+            <img class="w-100" src="/contents/Products/@photo.FileName"/>
+            <span class="btn btn-danger" data-id="@photo.Id" type= "submit">Xóa</span>
+            @* <form asp-action="PhotoDelete">
+                <button class="btn btn-danger" data-id="@photo.Id" type= "submit" >Xóa</button>
+            </form> *@
+        </div>
+    }
+</div> 
+
+@section Scripts{
+    <script>
+        function setClickDeletePhoto()
+        {
+            $("#box-photo-upload .photodetail span").click(function()
+            {
+                var spanButton = $(this);
+                var id = spanButton.data("id");
+
+                @* alert(id); *@
+            var formData = new FormData();
+            formData.append("id", id);
+
+            var urlDeletePhoto ="@Url.Action("DeletePhoto")";
+
+            $.ajax(
+                {
+                    data : formData,
+                    cache: false,
+                    url : urlDeletePhoto,
+                    type : "POST",
+                    contentType : false,
+                    processData: false;
+                    success : function(data)
+                    {
+                        @* console.log(data) *@
+                        LoadPhotos();
+
+                    }
+                });
+            });
+        }
+        function LoadPhotos()
+        {
+            var box = $("#box-photo-upload");
+            var ProductID = box.data("id");
+            box.empty();
+
+            var formData = new FormData();
+            formData.append("id", ProductID);
+
+            var urllistPhoto ="@Url.Action("ListPhoto")";
+
+            $.ajax({
+                    data : formData,
+                    cache: false,
+                    url : urllistPhoto,
+                    type : "POST",
+                    contentType : false,
+                    processData: false,
+                    success : function(data)
+                    {
+                       
+                        data.photos.forEach(function(item){
+                            var showIG = $(
+                                '<div class="photodetail w-25 p-1">'
+                                    + '<img class="w-100" src="'+ item.path +'" />'
+                                    + '<span class="btn btn-danger" data-id="'+ item.id  +'">Xóa</span></div>');
+                                    box.append(showIG);
+                        });
+
+                        setClickDeletePhoto();
+
+                    }
+                });
+        }
+
+        $(document).ready(function()
+        {
+            LoadPhotos();
+        });
+    </script>
+}

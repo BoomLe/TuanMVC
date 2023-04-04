@@ -1,0 +1,57 @@
+@using Microsoft.EntityFrameworkCore
+@using System.Data
+@inject MyDbContext MyDbContext
+
+@{
+    ViewData["Database"] = "Thông tin Database";
+    var connect = MyDbContext.Database.GetDbConnection();
+    var dbname = connect.Database;
+    var cantconect = MyDbContext.Database.CanConnect();
+}
+<partial name="_StatusMessage"></partial> 
+
+
+<h1>Thông tin cơ sở dữ liệu</h1>
+<p>Database : @dbname</p>
+<p>Source : @connect.DataSource</p>
+<p>State : @connect.State</p>
+<hr>
+@foreach (var Migrations in MyDbContext.Database.GetAppliedMigrations())
+{
+    <p>@Migrations</p>
+}
+@if(MyDbContext.Database.GetPendingMigrations().Any())
+{
+    <form method="post">
+        <button class="btn btn-success" asp-action="Migrations"> Tạo cơ sở dữ liệu</button>
+    </form>
+}
+
+<hr>
+@foreach (var Migrations in MyDbContext.Database.GetPendingMigrations())
+{
+    <p>@Migrations (Pending)</p>
+}
+<hr>
+@if (!cantconect)
+{
+    <p class="alert alert-danger"> không thấy tìm thấy Database</p>
+}
+
+@if(cantconect)
+{
+    await MyDbContext.Database.OpenConnectionAsync();
+    var table = MyDbContext.Database.GetDbConnection().GetSchema("Tables");
+  <ul>
+      @foreach (System.Data.DataRow r in table.Rows)
+    {
+       <li>@r["TABLE_NAME"]</li>
+        
+    }
+  </ul>
+
+  <a class="btn btn-danger" asp-action="Delete">Xóa Database : @dbname</a>
+  <a class="btn btn-danger" asp-action="AdminDataBase">Quyền Admin @dbname</a>
+
+  
+}
